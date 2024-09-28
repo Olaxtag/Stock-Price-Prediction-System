@@ -5,16 +5,16 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error
 
-# Step 1: Define the stock ticker and time period
-ticker = "AAPL"  # Example: Apple Inc.
+# Step 1: Define the stock ticker and time period u can use other ones
+ticker = "AAPL"  # Example:i used here the Apple Inc.
 print(f"Fetching data for {ticker}...")  # Indicate that fetching is in progress
-data = yf.download(ticker, start="2015-01-01", end="2024-01-11")
+data = yf.download(ticker, start="2015-01-01", end="2024-09-28")
 
-# Step 2: Check if data was fetched
+# Step 2: Check if data was fetched or emptyy
 if data.empty:
     print("No data fetched for the given ticker.")
 else:
-    print("Data fetched successfully!")  # Indicate success
+    print("Data fetched successfully!")  # Indicate successful fetching
 
     # Step 3: Visualize the closing price
     plt.figure(figsize=(12, 6))
@@ -30,7 +30,7 @@ else:
     data['Daily_Return'] = data['Close'].pct_change()  # Daily returns
     data.dropna(inplace=True)  # Drop rows with NaN values
 
-    # Step 5: Prepare data for modeling
+    # Step 5: Prepare data for modeling x,y
     # Define features (X) and labels (y)
     X = data[['Open', 'High', 'Low', 'Volume', 'SMA_20']]
     y = data['Close']
